@@ -7,6 +7,41 @@ from .models import Event, Venue
 from.forms import VenueForm, EventForm
 # Create your views here.
 
+def delete_venue(request, venue_id):
+    venue = Venue.objects.get(pk=venue_id)
+    venue.delete()
+    return redirect('list-venues')
+
+
+def delete_event(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    event.delete()
+    return redirect('list-events')
+
+
+def update_event(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    form = EventForm(request.POST or None, instance=event )
+    if form.is_valid():
+        form.save()
+        return redirect('list-events')
+
+    return render(request, 'events/update_event.html',
+    {"event" : event, "form" : form })
+
+def search_venues(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        venues = Venue.objects.filter(name__contains=searched)
+
+        return render(request, 'events/search_venues.html',
+        {"searched" : searched, "venues" : venues})
+
+    else:
+        return render(request, 'events/search_venues.html',
+        {})
+
+
 def add_event(request):
     submitted = False
     if request.method  == "POST":
