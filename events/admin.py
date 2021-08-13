@@ -4,6 +4,7 @@ from .models import Website_user
 from .models import Event
 
 # Register your models here.
+
 #admin.site.register(Venue)
 admin.site.register(Website_user)
 #admin.site.register(Event)
