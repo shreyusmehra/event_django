@@ -16,8 +16,10 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="{% url 'list-events' %}">Upcoming Events</a></li>
+              {% if user.is_authenticated %}
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{% url 'add-event' %}">Add Event</a></li>
+              {% endif %}
             </ul>
           </li>
 
@@ -27,14 +29,17 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="{% url 'list-venues' %}">List of Venues</a></li>
+              {% if user.is_authenticated %}
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{% url 'add-venue' %}">Add Venue</a></li>
+              {% endif %}
             </ul>
           </li>
 
+          {% if user.is_authenticated %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Downlods
+              Downloads
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="{% url 'venue_text' %}">Venue Text file</a></li>
@@ -42,10 +47,18 @@
               <li><a class="dropdown-item" href="{% url 'venue_pdf' %}">Venue PDF file</a></li>
             </ul>
           </li>
-
+          {% endif %}
+          
           {% if user.is_authenticated %}
-          <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ user }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+            </ul>
           </li>
           {% else %}
           <li class="nav-item">

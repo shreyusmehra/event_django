@@ -18,7 +18,7 @@ from reportlab.lib.pagesizes import letter
 from django.core.paginator import Paginator
 
 # Create your views here.
-
+  
 def venue_pdf(request): # Generate a PDF file of Venues
     # Create Bytestream buffer
     buf = io.BytesIO()
